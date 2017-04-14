@@ -1,54 +1,84 @@
 knowledge = {
 	"customers": {
-		"customer1" : {
-			"network": "TN",
+		"2829291" : {
+			"network": {
+				"tn": [2912921, 120120, 210120012, 10210201],
+				"kn": [23429829, 123123, 103030],
+				"vn": [9484884, 50509393, 4393939]
+				}
+			},
 			"purchased-items": [
 					{
-						"name": "Top NHL Playoff Series",
-						"product-id": 1230201,
-						"categories": ["sports", "books"],
-						"rating": 4.6,
-						"date": "2017-04-14"
+						"date": "2017-04-14",
+						"product" : {
+							"name": "Top NHL Playoff Series",
+							"product-id": 1230201,
+							"categories": ["sports", "books"],
+							"rating": 4.6,
+							"price": 29.99
+						}
 					}, 
 					{
-						"name": "Top NHL Playoff Series",
-						"product-id": 1230201,
-						"categories": ["sports", "books"],
-						"rating": 4.6,
-						"date": "2017-04-14"	
+						"date": "2017-04-14",
+						"product" : {
+							"name": "Top NHL Playoff Series",
+							"product-id": 1230201,
+							"categories": ["sports", "books"],
+							"rating": 4.6,
+							"price": 29.99
+						}	
 					}, 
 					{
-						"name": "Top NHL Playoff Series",
-						"product-id": 1230201,
-						"categories": ["sports", "books"],
 						"rating": 4.6,
-						"date": "2017-04-14"
+						"date": "2017-04-14",
+						"product" : {
+							"name": "Top NHL Playoff Series",
+							"product-id": 1230201,
+							"categories": ["sports", "books"],
+							"rating": 4.6,
+							"price": 29.99
+						}
 					}
 			]
 		},
-		"customer2": {
-			"network": "TN",
+		"3992928": {
+			"network": {
+				"tn": [2912921, 120120, 210120012, 10210201],
+				"kn": [23429829, 123123, 103030],
+				"vn": [9484884, 50509393, 4393939]
+				}
+			},
 			"purchased-items": [
 					{
-						"name": "Top NHL Playoff Series",
-						"product-id": 1230201,
-						"categories": ["sports", "books"],
-						"rating": 4.6,
-						"date": "2017-04-14"
+						"date": "2017-04-14",
+						"product" : {
+							"name": "Top NHL Playoff Series",
+							"product-id": 1230201,
+							"categories": ["sports", "books"],
+							"rating": 4.6,
+							"price": 29.99
+						}
 					}, 
 					{
-						"name": "Top NHL Playoff Series",
-						"product-id": 1230201,
-						"categories": ["sports", "books"],
-						"rating": 4.6,
-						"date": "2017-04-14"	
+						"date": "2017-04-14",
+						"product" : {
+							"name": "Top NHL Playoff Series",
+							"product-id": 1230201,
+							"categories": ["sports", "books"],
+							"rating": 4.6,
+							"price": 29.99
+						}	
 					}, 
 					{
-						"name": "Top NHL Playoff Series",
-						"product-id": 1230201,
-						"categories": ["sports", "books"],
 						"rating": 4.6,
-						"date": "2017-04-14"
+						"date": "2017-04-14",
+						"product" : {
+							"name": "Top NHL Playoff Series",
+							"product-id": 1230201,
+							"categories": ["sports", "books"],
+							"rating": 4.6,
+							"price": 29.99
+						}
 					}
 			]
 		}
