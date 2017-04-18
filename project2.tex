@@ -129,8 +129,8 @@
 		\textbf{Price:} a positive decimal number (with two decimal places)\\
 		\\\\
 		This JSON object serves as an outline for the organization of the data. This design is a proof of concept and will be replaced by Amazon's native NoSQL database later.  \\
-		
-		For example (insert JSON here):
+		\\
+		For example :
 		\inputminted{json}{knowledge-representation.json}
 		
 	\subsection*{Reasoning}
@@ -173,6 +173,7 @@ bought(CLIENT, ITEM), bought(CLIENT, ITEM), X = ITEM.
 \end{minted}
 		For this agent system like we have, however, the intermediary steps are simple to define and the goal is more complex. We are trying to generate a new suggested items based on the available personal-network data - with operations that should be flexible without a clearly defined goal. Because Amazon wants to create this quickly, we will use the Python programming language. This language is intuitive and is often used for rapid deployment. Based on the impact of the network item-suggestion program, later optimizations could use more rigorous languages to improve performance (e.g., Java, Go, C++).
 		
+		\inputminted{python}{sample-functions.py}
 		
 		\subsection*{Components and System Structure}
 		
