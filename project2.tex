@@ -31,22 +31,38 @@
 		\\\\
 		The following includes the general structure and domain constraints placed on the data. Data validation will ensure valid insertions to the knowledge base and data structures mentioned describe encoding while in server memory: 
 		\\\\
-		\underline{Network types:} limited to the strings "TN", "KN", or "VN". \\
-		\underline{Customers:} a hash map that has customer-ids as keys\\
-		\underline{Customer-id:} a hash map that allows keys: "network" and "purchased-items"\\
-		\underline{Network:} a hash map that has the following keys: "tn", "kn", and "vn"\\
-		\underline{TN:} an int array representing other customer id num.\ in Top Network (must be positive).\\ 
-		\underline{KN:} an int array representing other customer id num.\ in Key Network (must be positive). \\
-		\underline{VN:} an int array representing other customer id num.\ in Vital Network (must be positive).\\ 
-		\underline{Purchased-items:} an array that allows elements which are objects representing a customer's purchase.\\
-		\underline{Customer person object:} a hash map with the keys: "date" and "product"\\
-		\underline{Date:} a string representing the date of purchase, in the format yyyy-mm-dd, eg: "2017-04-31"\\
-		\underline{Product:} a hash map with the following keys: "name", "product-id", "categories", "rating", "price"\\
-		\underline{Name:}  a string representing the name of the purchased item \\
-		\underline{Product-id:} a positive integer representing the product id of the purchased item\\
-		\underline{Categories:} an array of strings, where each element is a item category that the purchased item\\ falls under. There is no limit on the number of categories in the array\\
-		\underline{Rating:} a decimal number (with one decimal place) between 0.0 and 5.0\\
-		\underline{Price:} a positive decimal number (with two decimal places)\\
+		\textbf{Network types:} limited to the strings "TN", "KN", or "VN". \\
+		\\
+		\textbf{Customers:} a hash map that has customer-ids as keys\\
+		\\
+		\textbf{Customer-id:} a hash map that allows keys: "network" and "purchased-items"\\
+		\\
+		\textbf{Network:} a hash map that has the following keys: "tn", "kn", and "vn"\\
+		\\
+		\textbf{TN:} an int array representing other customer id num.\ in Top Network (must be positive).\\ 
+		\\
+		\textbf{KN:} an int array representing other customer id num.\ in Key Network (must be positive). \\
+		\\
+		\textbf{VN:} an int array representing other customer id num.\ in Vital Network (must be positive).\\ 
+		\\
+		\textbf{Purchased-items:} an array that allows elements which are objects representing a customer's purchase.\\
+		\\
+		\textbf{Customer person object:} a hash map with the keys: "date" and "product"\\
+		\\
+		\textbf{Date:} a string representing the date of purchase, in the format yyyy-mm-dd, eg: "2017-04-31"\\
+		\\
+		\textbf{Product:} a hash map with the following keys: "name", "product-id", "categories", "rating", "price"\\
+		\\
+		\textbf{Name:}  a string representing the name of the purchased item \\
+		\\
+		\textbf{Product-id:} a positive integer representing the product id of the 
+		purchased item\\
+		\\
+		\textbf{Categories:} an array of strings, where each element is a item category that the purchased item falls under. There is no limit on the number of categories in the array\\
+		\\
+		\textbf{Rating:} a decimal number (with one decimal place) between 0.0 and 5.0\\
+		\\
+		\textbf{Price:} a positive decimal number (with two decimal places)\\
 		\\
 		This JSON object serves as an outline for the organization of the data. This design is a proof of concept and will be replaced by Amazon's native NoSQL database later.  
 		
@@ -59,11 +75,11 @@
 		\\\\
 		Initially, we will consider certain network-precedence, time passed since last purchase and peer-rating: 
 		\\\\
-		\underline{Network-precedence:} The Personal Network level, TN, KN, and VN, will be used to weigh the value of an item purchased by the peer for the user. This preference will be exponential, where the user TN will be worth considerably more than the KN, which, in turn, will be worth considerably more than the VN (e.g., weights could be TN = 1, KN = 0.4, VN = 0.1). The network-preference value will ensure that only the most pertinent items are presented, by increasing the likelihood that proximity to the user is factored into item suggestions. 
+		\textbf{Network-precedence:} The Personal Network level, TN, KN, and VN, will be used to weigh the value of an item purchased by the peer for the user. This preference will be exponential, where the user TN will be worth considerably more than the KN, which, in turn, will be worth considerably more than the VN (e.g., weights could be TN = 1, KN = 0.4, VN = 0.1). The network-preference value will ensure that only the most pertinent items are presented, by increasing the likelihood that proximity to the user is factored into item suggestions. 
 		\\\\
-		\underline{Time passed since last purchase:} Here the amount of time passed will negatively impact the likelihood the item will be suggested. That is, given trending popularity, an item was purchased two-years ago is less likely to be relevant to the user than if the item was purchased recently. Further, recently purchased items are more likely to promote peer-review of items and discussion about the Amazon platform, as the user may ask the person in their network whether they enjoyed they will recommend the item. 
+		\textbf{Time passed since last purchase:} Here the amount of time passed will negatively impact the likelihood the item will be suggested. That is, given trending popularity, an item was purchased two-years ago is less likely to be relevant to the user than if the item was purchased recently. Further, recently purchased items are more likely to promote peer-review of items and discussion about the Amazon platform, as the user may ask the person in their network whether they enjoyed they will recommend the item. 
 		\\\\
-		\underline{Peer-Rating:} The peer-rating will increase the likelihood that such an item will be displayed to the user. The rating will act synergistically with the Personal Network level. Given a high-rating by a peer that is close to the user, the item is very likely to be recommended. Conversely, a low-rating by the peer who is close to the user will decrease the likelihood that the item will be recommended for the user. In order to optimize suggestions, negative-ratings will counteract positive-ratings from other peers. Further, a low-rating by high level networks will carry more weight than a positive rating on a low level network - ensuring that such an item will not be displayed. 
+		\textbf{Peer-Rating:} The peer-rating will increase the likelihood that such an item will be displayed to the user. The rating will act synergistically with the Personal Network level. Given a high-rating by a peer that is close to the user, the item is very likely to be recommended. Conversely, a low-rating by the peer who is close to the user will decrease the likelihood that the item will be recommended for the user. In order to optimize suggestions, negative-ratings will counteract positive-ratings from other peers. Further, a low-rating by high level networks will carry more weight than a positive rating on a low level network - ensuring that such an item will not be displayed. 
 		\\\\
 		As the system evolves and and demonstrates its utility, we will fine-tune the process and adjust criteria in order to maximize sales. 
 		\\\\
