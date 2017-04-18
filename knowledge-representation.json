@@ -1,87 +1,85 @@
-knowledge = {
-	"customers": {
-		"2829291" : {
-			"network": {
-				"tn": [2912921, 120120, 210120012, 10210201],
-				"kn": [23429829, 123123, 103030],
-				"vn": [9484884, 50509393, 4393939]
-				}
-			},
-			"purchased-items": [
-					{
-						"date": "2017-04-14",
-						"product" : {
-							"name": "Top NHL Playoff Series",
-							"product-id": 1230201,
-							"categories": ["sports", "books"],
-							"rating": 4.6,
-							"price": 29.99
-						}
-					}, 
-					{
-						"date": "2017-04-14",
-						"product" : {
-							"name": "Top NHL Playoff Series",
-							"product-id": 1230201,
-							"categories": ["sports", "books"],
-							"rating": 4.6,
-							"price": 29.99
-						}	
-					}, 
-					{
-						"rating": 4.6,
-						"date": "2017-04-14",
-						"product" : {
-							"name": "Top NHL Playoff Series",
-							"product-id": 1230201,
-							"categories": ["sports", "books"],
-							"rating": 4.6,
-							"price": 29.99
-						}
-					}
-			]
-		},
-		"3992928": {
-			"network": {
-				"tn": [2912921, 120120, 210120012, 10210201],
-				"kn": [23429829, 123123, 103030],
-				"vn": [9484884, 50509393, 4393939]
-				}
-			},
-			"purchased-items": [
-					{
-						"date": "2017-04-14",
-						"product" : {
-							"name": "Top NHL Playoff Series",
-							"product-id": 1230201,
-							"categories": ["sports", "books"],
-							"rating": 4.6,
-							"price": 29.99
-						}
-					}, 
-					{
-						"date": "2017-04-14",
-						"product" : {
-							"name": "Top NHL Playoff Series",
-							"product-id": 1230201,
-							"categories": ["sports", "books"],
-							"rating": 4.6,
-							"price": 29.99
-						}	
-					}, 
-					{
-						"rating": 4.6,
-						"date": "2017-04-14",
-						"product" : {
-							"name": "Top NHL Playoff Series",
-							"product-id": 1230201,
-							"categories": ["sports", "books"],
-							"rating": 4.6,
-							"price": 29.99
-						}
-					}
-			]
-		}
-	}
+{
+  "customers": {
+    "2829291" : {
+      "network": {
+        "tn": [2912921, 120120, 210120012, 10210201],
+        "kn": [23429829, 123123, 103030],
+        "vn": [9484884, 50509393, 4393939]
+        }
+      ,
+      "purchased-items": [
+          {
+            "date": "2015-11-14",
+            "product" : {
+              "name": "Rubik's Cube",
+              "product-id": 12345,
+              "categories": ["games", "toys", "puzzles"],
+              "rating": 3,
+              "price": 14.49
+            }
+          }, 
+          {
+            "date": "2017-04-14",
+            "product" : {
+              "name": "Top NHL Playoff Series",
+              "product-id": 1230201,
+              "categories": ["sports", "books"],
+              "rating": 4,
+              "price": 29.99
+            }  
+          }, 
+          {
+            "date": "2013-01-02",
+            "product" : {
+              "name": "Yamaha Guitar",
+              "product-id": 636362,
+              "categories": ["instruments"],
+              "rating": 3,
+              "price": 149.99
+            }
+          }
+      ]
+    },
+    "3992928": {
+      "network": {
+        "tn": [4335453, 234234, 87686, 555555],
+        "kn": [12344, 825893, 234522],
+        "vn": [3484884, 1393939]
+        }
+      ,
+      "purchased-items": [
+          {
+            "date": "2016-07-31",
+            "product" : {
+              "name": "Beats by Dre Headphones",
+              "product-id": 66666666,
+              "categories": ["music", "audio", "electronics"],
+              "rating": 2,
+              "price": 499.99
+            }
+          }, 
+          {
+            "date": "2012-11-11",
+            "product" : {
+              "name": "Rice Cooker",
+              "product-id": 7293722,
+              "categories": ["appliances", "kitchen", "cooking", "food"],
+              "rating": 5,
+              "price": 29.99
+            }  
+          }, 
+          {
+            "date": "2015-09-21",
+            "product" : {
+              "name": "Alarm Clock",
+              "product-id": 245345,
+              "categories": ["electronics", "clocks"],
+              "rating": 4,
+              "price": 52.23
+            }
+          }
+      ]
+    }
+  }
 
 }

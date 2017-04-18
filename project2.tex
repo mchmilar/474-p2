@@ -9,6 +9,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{caption}
 \renewcommand{\theenumi}{\alph{enumi}}
+\usepackage{minted}
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 
 \lstset{ %
@@ -134,7 +135,8 @@
 		This JSON object serves as an outline for the organization of the data. This design is a proof of concept and will be replaced by Amazon's native NoSQL database later.  \\
 		
 		For example (insert JSON here):
-		\\\\
+		\inputminted{json}{knowledge-representation.json}
+		
 	\subsection*{Reasoning}
 		Automated reasoning will be used to determine what purchased-items to display from your network. The approach will use Bayesian reasoning through a Bayesian Network. 
 		\\\\
@@ -163,16 +165,16 @@
 		Prolog is Turing complete and, thus, can be used to solve this problem. Thus, it would be possible to prototype the system using Prolog, but far from ideal. Prolog is an effective language to facilitate implementation is when you have a known goal and intermediary steps for which the logic is difficult to define. When the intermediary steps are difficult, Prolog will make development easier by letting the compiler handle the logic required to attain the goal. 
 		\\\\
 		For example:
-		
-		\% Facts\\
-		\tab bought(user1, item1).\\
-		\tab bought(user2, item1).\\
-		\tab bought(user3, item2).\\
-		
-		\% Sample Rule - if at least two people in network purchased an item \\
-		\tab two\_purchased(user1, ITEM) :- \\
-		\tab \tab bought(CLIENT, ITEM), bought(CLIENT, ITEM), X = ITEM.\\
-		
+\begin{minted}{prolog}
+% Facts
+bought(user1, item1).
+bought(user2, item1).
+bought(user3, item2).
+
+% Sample Rule - if at least two people in network purchased an item
+two_purchased(user1, ITEM) :- 
+bought(CLIENT, ITEM), bought(CLIENT, ITEM), X = ITEM.
+\end{minted}
 		For this agent system like we have, however, the intermediary steps are simple to define and the goal is more complex. We are trying to generate a new suggested items based on the available personal-network data - with operations that should be flexible without a clearly defined goal. Because Amazon wants to create this quickly, we will use the Python programming language. This language is intuitive and is often used for rapid deployment. Based on the impact of the network item-suggestion program, later optimizations could use more rigorous languages to improve performance (e.g., Java, Go, C++).
 		
 		
