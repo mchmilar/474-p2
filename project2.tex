@@ -172,11 +172,11 @@ two_purchased(user1, ITEM) :-
 bought(CLIENT, ITEM), bought(CLIENT, ITEM), X = ITEM.
 \end{minted}
 		For this agent system like we have, however, the intermediary steps are simple to define and the goal is more complex. We are trying to generate a new suggested items based on the available personal-network data - with operations that should be flexible without a clearly defined goal. Because Amazon wants to create this quickly, we will use the Python programming language. This language is intuitive and is often used for rapid deployment. Based on the impact of the network item-suggestion program, later optimizations could use more rigorous languages to improve performance (e.g., Java, Go, C++).
-		
+		\clearpage
+		For example, to get a list of purchases to recommend from a particular network for a particular customer we could do the following with Python:
 		\inputminted{python}{sample-functions.py}
 		
 		\subsection*{Components and System Structure}
-		
 		\begin{center}
 			\includegraphics[width=1\linewidth]{474-project2}
 		\end{center}
