@@ -103,11 +103,11 @@
 		\\
 		\textbf{Network:} a hash map that has the following keys: "tn", "kn", and "vn"\\
 		\\
-		\textbf{TN:} an int array representing other customer id num.\ in Top Network (must be positive).\\ 
+		\textbf{TN:} a positive int array representing other customer id num.\ in Top Network.\\ 
 		\\
-		\textbf{KN:} an int array representing other customer id num.\ in Key Network (must be positive). \\
+		\textbf{KN:} a positive int array representing other customer id num.\ in Key Network. \\
 		\\
-		\textbf{VN:} an int array representing other customer id num.\ in Vital Network (must be positive).\\ 
+		\textbf{VN:} a positive int array representing other customer id num.\ in Vital Network.\\ 
 		\\
 		\textbf{Purchased-items:} an array that allows elements which are objects representing a customer's purchase.\\
 		\\
@@ -153,9 +153,9 @@
 			\includegraphics[width=1\linewidth]{bayes}
 		\end{center}
 		
-		Probability tables are used in this case to capture the likelihood that an item should be suggested or avoided. From this, we can get aggregate "Suggest" and "Avoid" results by iterating through the user's Personal Network to see how individual items rank - Avoid rankings will detract from Suggest rankings.  
+		Probability tables are used in this case to capture the likelihood that an item should be suggested or avoided. From this, we can get aggregate "Suggest" and "Avoid" results by iterating through the user's Personal Network to see how individual items rank - Avoid rankings will detract from Suggest rankings. An assumption was made that the suggested item is not dependent on the section the user is viewing, although that could be added in later optimizations. Instead, items purchased by peers are ranked through the Bayesian network by simply iterating through peer-purchased items. Another assumption is that the user Personal Networks remain relatively small, as the process will grow rapidly. However, if the Personal Networks are not assumed to be small, we could simply select the first n items that meet a predefined criteria in order to limit processing time.    
 		\\\\
-		The values in the tables will be established initially by assessing purchase history within the network to weigh the importance of each node. Subsequent analysis of the system will serve to fine-tune the probabilities to maximize sales. However, the tables data should fit the following guidelines: The closer network association the higher the value of ratings. Ratings from 3 to 5 hold increasing importance with respect to Positive rankings, while ratings from 2 to 1 hold increasing importance with respect to Negative rankings.  Time passed will determine relevance of suggestion or opposition to the purchase suggestion.
+		The values in the tables will be established initially by assessing purchase history within the network to weigh the importance of each node. Subsequent analysis of the system will serve to fine-tune the probabilities to maximize sales. However, the tables data should fit the following guidelines: The closer network association the higher the value of ratings. Ratings from 3 to 5 hold increasing importance with respect to Positive rankings, while ratings from 2 to 1 hold increasing importance with respect to Negative rankings.  Time passed will determine relevance of suggestion or opposition to the purchase suggestion. Put another way, time will determine the magnitude of the response, but not the direction. 
 		\\\\
 	\subsection*{Programming Language}
 		Prolog is Turing complete and, thus, can be used to solve this problem. Thus, it would be possible to prototype the system using Prolog, but far from ideal. Prolog is an effective language to facilitate implementation is when you have a known goal and intermediary steps for which the logic is difficult to define. When the intermediary steps are difficult, Prolog will make development easier by letting the compiler handle the logic required to attain the goal. 
