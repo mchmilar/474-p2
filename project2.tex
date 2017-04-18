@@ -21,9 +21,78 @@
 \begin{document}
 	
 	
-	\subsection*{Which best fit this problem: an expert system, a knowledge base system or (Multi) agent system and why?}
-		An expert system would provide sufficient means to address the problem, but would not be properly integrated into the Amazon environment. In this case, a knowledge based system could be used if we wanted adaptive learning responses from network selections. For instance, if you repeatedly followed links from certain individuals in your network, a knowledge base system (KB) could adapt from this information and provide you more feedback from the peers with which you share more purchasing interests. Although this would make sense, it is assumed that network information is already pre-determined and, thus, such learning procedure would be overkill.
+	\subsection*{1. Which best fit this problem: an expert system, a knowledge base system or (Multi) agent system and why?}
+		An expert system would provide sufficient means to address the computational aspects of the problem, given simple logic to determine suggested item, but could not be properly integrated into the Amazon environment. A knowledge based system could be used if we wanted adaptive learning responses from network selections. For instance, if you repeatedly followed links from certain individuals in your network, a knowledge base system (KB) could adapt from this information and provide you more feedback from the peers with which you share more purchasing interests. Although this offers one possible solution, it is assumed that network information is already predetermined by Amazon and, thus, such learning procedure would be require unnecessary extra work and computational overhead. 
+		\\\\
+		Consequently, we will use a simple embedded agent that interacts autonomously with the Amazon server environment. This will primarily be a reactive agent, without learning capabilities. The reason for avoiding learning and adaptivity for the agent is the complexity of having a learning and adaptive agent would be too expensive to justify its implementation - particularly in this case where Amazon has Personal Network data with which to weigh decisions. Although a multi-agent system would also be possible for this intelligent system, we believe there are too few interacting components to justify this form of implementation. This last decision is based on the assumption that everything we need to develop a suggested item based on a peer-purchase can be obtained directly from the peer network. 
+		\\\\
+	\subsection*{2. Provide formalism for the knowledge representation of the domain: customer(s), with his/her network (TN, KN, VN), purchased items and their categories, ratings (from the reviews)}
+		The knowledge representation will be encoded into database tables. For efficiency, the data will be encoded into Amazon's native NoSQL database which will be able to execute queries much more quickly. 
+		\\\\
+		The following includes the general structure and domain constraints placed on the data. Data validation will ensure valid insertions to the knowledge base and data structures mentioned describe encoding while in server memory: 
+		\\\\
+		\underline{Network types:} limited to the strings "TN", "KN", or "VN". \\
+		\underline{Customers:} a hash map that has customer-ids as keys\\
+		\underline{Customer-id:} a hash map that allows keys: "network" and "purchased-items"\\
+		\underline{Network:} a hash map that has the following keys: "tn", "kn", and "vn"\\
+		\underline{TN:} an int array representing other customer id num.\ in Top Network (must be positive).\\ 
+		\underline{KN:} an int array representing other customer id num.\ in Key Network (must be positive). \\
+		\underline{VN:} an int array representing other customer id num.\ in Vital Network (must be positive).\\ 
+		\underline{Purchased-items:} an array that allows elements which are objects representing a customer's purchase.\\
+		\underline{Customer person object:} a hash map with the keys: "date" and "product"\\
+		\underline{Date:} a string representing the date of purchase, in the format yyyy-mm-dd, eg: "2017-04-31"\\
+		\underline{Product:} a hash map with the following keys: "name", "product-id", "categories", "rating", "price"\\
+		\underline{Name:}  a string representing the name of the purchased item \\
+		\underline{Product-id:} a positive integer representing the product id of the purchased item\\
+		\underline{Categories:} an array of strings, where each element is a item category that the purchased item\\ falls under. There is no limit on the number of categories in the array\\
+		\underline{Rating:} a decimal number (with one decimal place) between 0.0 and 5.0\\
+		\underline{Price:} a positive decimal number (with two decimal places)\\
+		\\
+		This JSON object serves as an outline for the organization of the data. This design is a proof of concept and will be replaced by Amazon's native NoSQL database later.  
 		
-		Instead, a simple embedded agent that could interact autonomously with the Amazon environment. This would be a reactive agent, without learning capabilities because, as discussed previously, the complexity of having a learning and adaptive agent would be too expensive to justify its implementation in this case. 
+		For example (insert JSON here):
+		
+	\subsection*{3. Which technique(s) you will use for the reasoning process? [30 points] Amazon purpose is that you purchase more items. So you will receive list of items (and their rating if available) bought by people of your (TN, KN, VN) network, under: "Recommendation for you by your Personal Network: TN, KN, VN"}
+		Automated reasoning will be used to determine what purchased-items to display from your network. The approach will use Bayesian reasoning through a Bayesian Network. 
+		\\\\
+		The Bayesian Network will allow us to establish a criteria by which to decide when to include items purchased by peers in order to maximize sales. This reasoning will be important, as arbitrarily assigning items purchased by peers as suggested for you would do little to improve sales. 
+		\\\\
+		Initially, we will consider certain network-precedence, time passed since last purchase and peer-rating: 
+		\\\\
+		\underline{Network-precedence:} The Personal Network level, TN, KN, and VN, will be used to weigh the value of an item purchased by the peer for the user. This preference will be exponential, where the user TN will be worth considerably more than the KN, which, in turn, will be worth considerably more than the VN (e.g., weights could be TN = 1, KN = 0.4, VN = 0.1). The network-preference value will ensure that only the most pertinent items are presented, by increasing the likelihood that proximity to the user is factored into item suggestions. 
+		\\\\
+		\underline{Time passed since last purchase:} Here the amount of time passed will negatively impact the likelihood the item will be suggested. That is, given trending popularity, an item was purchased two-years ago is less likely to be relevant to the user than if the item was purchased recently. Further, recently purchased items are more likely to promote peer-review of items and discussion about the Amazon platform, as the user may ask the person in their network whether they enjoyed they will recommend the item. 
+		\\\\
+		\underline{Peer-Rating:} The peer-rating will increase the likelihood that such an item will be displayed to the user. The rating will act synergistically with the Personal Network level. Given a high-rating by a peer that is close to the user, the item is very likely to be recommended. Conversely, a low-rating by the peer who is close to the user will decrease the likelihood that the item will be recommended for the user. In order to optimize suggestions, negative-ratings will counteract positive-ratings from other peers. Further, a low-rating by high level networks will carry more weight than a positive rating on a low level network - ensuring that such an item will not be displayed. 
+		\\\\
+		As the system evolves and and demonstrates its utility, we will fine-tune the process and adjust criteria in order to maximize sales. 
+		\\\\
+		Sample Bayesian Network:
+		\begin{center}
+			\includegraphics[width=1\linewidth]{bayes}
+		\end{center}
+		
+		Probability tables are used in this case to capture the likelihood that an item should be suggested or avoided. From this, we can get aggregate "Suggest" and "Avoid" results by iterating through the user's Personal Network to see how individual items rank - Avoid rankings will detract from Suggest rankings.  
+		\\\\
+		The values in the tables will be established initially by assessing purchase history within the network to weigh the importance of each node. Subsequent analysis of the system will serve to fine-tune the probabilities to maximize sales. However, the tables data should fit the following guidelines: The closer network association the higher the value of ratings. Ratings from 3 to 5 hold increasing importance with respect to Positive rankings, while ratings from 2 to 1 hold increasing importance with respect to Negative rankings.  Time passed will determine relevance of suggestion or opposition to the purchase suggestion.
+		
+	\subsection*{4. Can you use Prolog as a symbolic language to prototype the system's reasoning? If yes show how using a fictitious? If no, then suggest which language you use and why?}
+		Prolog is Turing complete and, thus, can be used to solve this problem. Thus, it would be possible to prototype the system using Prolog, but far from ideal. Prolog is an effective language to facilitate implementation is when you have a known goal and intermediary steps for which the logic is difficult to define. When the intermediary steps are difficult, Prolog will make development easier by letting the compiler handle the logic required to attain the goal. 
+		
+		For example:
+		
+		\% Facts
+		bought(user1, item1).
+		bought(user2, item1).
+		bought(user3, item2).
+		
+		\% Sample Rule - if at least two people in network purchased an item
+		two\_purchased(user1, ITEM) :- 
+		bought(CLIENT, ITEM), bought(CLIENT, ITEM), X = ITEM.
+		
+		
+		For this agent system like we have, however, the intermediary steps are simple to define and the goal is more complex. We are trying to generate a new suggested items based on the available personal-network data - with operations that should be flexible without a clearly defined goal. Because Amazon wants to create this quickly, we will use the Python programming language. This language is intuitive and is often used for rapid deployment. Based on the impact of the network item-suggestion program, later optimizations could use more rigorous languages to improve performance (e.g., Java, Go, C++).
+		
+	
 		
 \end{document}
