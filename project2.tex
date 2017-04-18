@@ -9,6 +9,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{caption}
 \renewcommand{\theenumi}{\alph{enumi}}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
 
 \lstset{ %
 	frame=single,
@@ -67,7 +68,7 @@
 		This JSON object serves as an outline for the organization of the data. This design is a proof of concept and will be replaced by Amazon's native NoSQL database later.  
 		
 		For example (insert JSON here):
-		
+		\\\\
 	\subsection*{Reasoning}
 		Automated reasoning will be used to determine what purchased-items to display from your network. The approach will use Bayesian reasoning through a Bayesian Network. 
 		\\\\
@@ -91,21 +92,20 @@
 		Probability tables are used in this case to capture the likelihood that an item should be suggested or avoided. From this, we can get aggregate "Suggest" and "Avoid" results by iterating through the user's Personal Network to see how individual items rank - Avoid rankings will detract from Suggest rankings.  
 		\\\\
 		The values in the tables will be established initially by assessing purchase history within the network to weigh the importance of each node. Subsequent analysis of the system will serve to fine-tune the probabilities to maximize sales. However, the tables data should fit the following guidelines: The closer network association the higher the value of ratings. Ratings from 3 to 5 hold increasing importance with respect to Positive rankings, while ratings from 2 to 1 hold increasing importance with respect to Negative rankings.  Time passed will determine relevance of suggestion or opposition to the purchase suggestion.
-		
+		\\\\
 	\subsection*{Programming Language}
 		Prolog is Turing complete and, thus, can be used to solve this problem. Thus, it would be possible to prototype the system using Prolog, but far from ideal. Prolog is an effective language to facilitate implementation is when you have a known goal and intermediary steps for which the logic is difficult to define. When the intermediary steps are difficult, Prolog will make development easier by letting the compiler handle the logic required to attain the goal. 
-		
+		\\\\
 		For example:
 		
-		\% Facts
-		bought(user1, item1).
-		bought(user2, item1).
-		bought(user3, item2).
+		\% Facts\\
+		\tab bought(user1, item1).\\
+		\tab bought(user2, item1).\\
+		\tab bought(user3, item2).\\
 		
-		\% Sample Rule - if at least two people in network purchased an item
-		two\_purchased(user1, ITEM) :- 
-		bought(CLIENT, ITEM), bought(CLIENT, ITEM), X = ITEM.
-		
+		\% Sample Rule - if at least two people in network purchased an item \\
+		\tab two\_purchased(user1, ITEM) :- \\
+		\tab \tab bought(CLIENT, ITEM), bought(CLIENT, ITEM), X = ITEM.\\
 		
 		For this agent system like we have, however, the intermediary steps are simple to define and the goal is more complex. We are trying to generate a new suggested items based on the available personal-network data - with operations that should be flexible without a clearly defined goal. Because Amazon wants to create this quickly, we will use the Python programming language. This language is intuitive and is often used for rapid deployment. Based on the impact of the network item-suggestion program, later optimizations could use more rigorous languages to improve performance (e.g., Java, Go, C++).
 		
@@ -119,7 +119,7 @@
 		\subsection*{Development Methodology}
 		
 		The methodology we will use to in order to develop the program is Agile. This is a common software engineering process that allows developers to quickly develop software through an iterative process that takes into account mistakes and feedback in order to adjust course. This methodology is the best approach because it will ensure that Amazon will have the system up and running with the least possible delay. 
-		
+		\\\\
 		The Agile development will include a planning phase for a two-week sprint, where developers will attempt to complete the tasks defined in the planning phase. A quick progress report will be given orally every morning at a 15 minute scrum, in order to keep everyone informed, get input from peers or re-allocate developer resources in the case where developer is blocking on some issue. This approach will help define milestones, assess progress, and re-conceptualize what needs to be done, if necessary. Consequently, this approach will help us implement the agent system, test it and make any necessary changes, while accommodate a more flexible development process. 
 		
 \end{document}
